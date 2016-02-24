@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.abhishek.eventmanager.View.EmailFragment">
+
+
+    <EditText
+        android:id="@+id/to_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="To"
+        android:ems="10"
+        android:layout_margin="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/subject_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="Subject"
+        android:ems="10"
+        android:layout_margin="5dp"
+        android:layout_below="@id/to_editText"/>
+
+    <EditText
+        android:id="@+id/body_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="Body"
+        android:ems="10"
+        android:layout_margin="5dp"
+        android:layout_below="@id/subject_editText"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/save_button"
+        android:layout_below="@+id/body_editText"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

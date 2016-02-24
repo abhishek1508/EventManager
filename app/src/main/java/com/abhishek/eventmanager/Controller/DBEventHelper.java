@@ -65,7 +65,7 @@ public class DBEventHelper extends SQLiteOpenHelper {
 
         db.insert(TABLE_EMAIL, null, values);
         db.close();
-        Toast.makeText(mContext, "1st entry added to the table", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, "Entry added", Toast.LENGTH_SHORT).show();
     }
 
     public List<Email> getAllEmailEvents(){

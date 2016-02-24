@@ -35,15 +35,19 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter<EmailEventsH
 
     @Override
     public void onBindViewHolder(EmailEventsHolder holder, int position) {
-        for (Email e : mEmailList) {
-            holder.mEmailTo.setText(e.getTo());
-            holder.mEmailSubj.setText(e.getSubject());
-        }
+        Email email = mEmailList.get(position);
+        holder.mEmailTo.setText(email.getTo());
+        holder.mEmailSubj.setText(email.getSubject());
 
     }
 
     @Override
     public int getItemCount() {
         return mEmailList.size();
+    }
+
+    public void addNewEmailEvent(Email email){
+        mEmailList.add(email);
+        notifyItemInserted(mEmailList.size());
     }
 }

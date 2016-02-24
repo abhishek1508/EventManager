@@ -30,6 +30,8 @@ public class ViewEmailEventsFragment extends Fragment {
     private DBEventHelper mHelper;
     private SQLiteDatabase mDatabase;
 
+    private EventsRecyclerViewAdapter mRecyclerViewAdapter = null;
+
     public ViewEmailEventsFragment() {
         // Required empty public constructor
     }
@@ -66,10 +68,10 @@ public class ViewEmailEventsFragment extends Fragment {
 
     private void setRecyclerView(){
 
-        EventsRecyclerViewAdapter recyclerViewAdapter = new EventsRecyclerViewAdapter(getActivity(),mHelper.getAllEmailEvents());
+        mRecyclerViewAdapter = new EventsRecyclerViewAdapter(getActivity(),mHelper.getAllEmailEvents());
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(manager);
-        mRecycler.setAdapter(recyclerViewAdapter);
+        mRecycler.setAdapter(mRecyclerViewAdapter);
     }
 
     public void onButtonPressed() {
@@ -93,6 +95,11 @@ public class ViewEmailEventsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void newCreatedEmailEvents(Email e){
+        mHelper.addEmail(e);
+        mRecyclerViewAdapter.addNewEmailEvent(e);
     }
 
 }

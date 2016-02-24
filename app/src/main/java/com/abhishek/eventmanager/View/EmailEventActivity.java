@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.abhishek.eventmanager.Controller.DBEventHelper;
+import com.abhishek.eventmanager.Model.Email;
 import com.abhishek.eventmanager.R;
 
 import java.util.List;
@@ -52,6 +53,7 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
 
     @Override
     public void commEventDetailsToViewEventsFragment(List<String> eventDesc) {
-
+        Email email = new Email(eventDesc.get(0),eventDesc.get(1),eventDesc.get(2));
+        mViewFragment.newCreatedEmailEvents(email);
     }
 }

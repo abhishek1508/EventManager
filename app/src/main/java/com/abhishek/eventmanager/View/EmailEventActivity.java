@@ -19,6 +19,8 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
 
     FragmentManager mManager;
     FragmentTransaction mTransaction;
+    ViewEmailEventsFragment mViewFragment;
+    ManageEmailEventsFragment mManageFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +34,10 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment frag = ManageEmailEventsFragment.newInstance();
+                mManageFragment = ManageEmailEventsFragment.newInstance();
                 mManager = getSupportFragmentManager();
                 mTransaction = mManager.beginTransaction();
-                mTransaction.replace(R.id.container_fragment, frag, "ManageEmailEvents");
+                mTransaction.replace(R.id.container_fragment, mManageFragment, "ManageEmailEvents");
                 mTransaction.addToBackStack("MessageEmailEvents");
                 mTransaction.commit();
             }
@@ -43,10 +45,10 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
     }
 
     private void showViewEmailFragment(){
-        Fragment frag = ViewEmailEventsFragment.newInstance();
+        mViewFragment = ViewEmailEventsFragment.newInstance();
         mManager = getSupportFragmentManager();
         mTransaction = mManager.beginTransaction();
-        mTransaction.replace(R.id.container_fragment,frag,"ViewEmailEvents");
+        mTransaction.replace(R.id.container_fragment, mViewFragment, "ViewEmailEvents");
         mTransaction.commit();
     }
 

@@ -8,11 +8,24 @@ public class Email {
     private String subject;
     private String to;
     private String body;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Email(String to, String subject, String body){
         this.subject = subject;
         this.to = to;
         this.body = body;
+    }
+
+    public Email(){
+        //Empty constructor
     }
 
     public String getSubject() {

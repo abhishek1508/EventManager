@@ -1,6 +1,7 @@
 package com.abhishek.eventmanager.View;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.abhishek.eventmanager.Controller.DBEventHelper;
+import com.abhishek.eventmanager.Model.Email;
 import com.abhishek.eventmanager.R;
+
+import java.util.List;
 
 public class ViewEmailEventsFragment extends Fragment {
 
@@ -21,6 +26,9 @@ public class ViewEmailEventsFragment extends Fragment {
 
     private OnViewEventsInteractionListener mListener;
     private RecyclerView mRecycler;
+
+    private DBEventHelper mHelper;
+    private SQLiteDatabase mDatabase;
 
     public ViewEmailEventsFragment() {
         // Required empty public constructor
@@ -38,6 +46,8 @@ public class ViewEmailEventsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mHelper = new DBEventHelper(getActivity());
+        mDatabase = mHelper.getWritableDatabase();
         /*if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -55,7 +65,8 @@ public class ViewEmailEventsFragment extends Fragment {
     }
 
     private void setRecyclerView(){
-        EventsRecyclerViewAdapter recyclerViewAdapter = new EventsRecyclerViewAdapter(getActivity());
+
+        EventsRecyclerViewAdapter recyclerViewAdapter = new EventsRecyclerViewAdapter(getActivity(),mHelper.getAllEmailEvents());
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(manager);
         mRecycler.setAdapter(recyclerViewAdapter);

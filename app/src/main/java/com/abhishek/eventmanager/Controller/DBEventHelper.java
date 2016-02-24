@@ -2,11 +2,15 @@ package com.abhishek.eventmanager.Controller;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import com.abhishek.eventmanager.Model.Email;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Abhishek on 2/23/2016.
@@ -62,5 +66,29 @@ public class DBEventHelper extends SQLiteOpenHelper {
         db.insert(TABLE_EMAIL, null, values);
         db.close();
         Toast.makeText(mContext, "1st entry added to the table", Toast.LENGTH_SHORT).show();
+    }
+
+    public List<Email> getAllEmailEvents(){
+        List<Email> emailList = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_EMAIL;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Email email = new Email();
+                email.setId(Integer.parseInt(cursor.getString(0)));
+                email.setTo(cursor.getString(1));
+                email.setSubject(cursor.getString(2));
+                email.setBody(cursor.getString(3));
+                // Adding contact to list
+                emailList.add(email);
+            } while (cursor.moveToNext());
+        }
+        // return contact list
+        return emailList;
     }
 }

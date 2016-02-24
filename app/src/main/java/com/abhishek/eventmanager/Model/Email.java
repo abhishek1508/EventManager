@@ -1,26 +1,26 @@
-package com.abhishek.eventmanager.Controller;
+package com.abhishek.eventmanager.Model;
 
 /**
  * Created by Abhishek on 2/23/2016.
  */
 public class Email {
 
-    private String email;
+    private String subject;
     private String to;
     private String body;
 
-    Email(String email, String to, String body){
-        this.email = email;
+    public Email(String to, String subject, String body){
+        this.subject = subject;
         this.to = to;
         this.body = body;
     }
 
-    public String getEmail() {
-        return email;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public String getTo() {

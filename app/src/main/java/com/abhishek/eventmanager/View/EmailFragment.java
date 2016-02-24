@@ -1,7 +1,6 @@
 package com.abhishek.eventmanager.View;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +11,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.abhishek.eventmanager.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmailFragment extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
@@ -89,8 +91,12 @@ public class EmailFragment extends Fragment implements View.OnClickListener{
         String sub = (mSubjectEditText.getText()).toString();
         String body = (mBodyEditText.getText()).toString();
         if(!to.equals("") && !sub.equals("") && !body.equals("")){
+            List<String> emailList = new ArrayList<>();
+            emailList.add(to);
+            emailList.add(sub);
+            emailList.add(body);
             if (mListener != null) {
-                mListener.closeActivity();
+                mListener.onFragmentInteraction(emailList);
             }
         }
         else

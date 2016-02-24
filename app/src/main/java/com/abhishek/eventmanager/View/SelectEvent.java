@@ -2,17 +2,16 @@ package com.abhishek.eventmanager.View;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.Button;
 
 import com.abhishek.eventmanager.R;
 
-public class ViewEvents extends AppCompatActivity {
+public class SelectEvent extends AppCompatActivity {
+
+    private Button mButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +20,11 @@ public class ViewEvents extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mButton = (Button) findViewById(R.id.email_button);
+        mButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(ViewEvents.this,ManageEvents.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                startActivity(new Intent(SelectEvent.this,EmailEventActivity.class));
             }
         });
     }

@@ -70,6 +70,7 @@ public class ViewEmailEventsFragment extends Fragment {
 
         mRecyclerViewAdapter = new EventsRecyclerViewAdapter(getActivity(),mHelper.getAllEmailEvents());
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         mRecycler.setLayoutManager(manager);
         mRecycler.setAdapter(mRecyclerViewAdapter);
     }

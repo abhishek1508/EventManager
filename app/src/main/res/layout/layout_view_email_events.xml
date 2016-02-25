@@ -3,40 +3,46 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_marginBottom="5dp">
+    android:layout_margin="10dp">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="23 Mar"
+        android:id="@+id/text_email_send_date"
+        android:layout_width="@dimen/date_text_view_width"
+        android:layout_height="@dimen/date_text_view_height"
+        android:text="23 MAR"
+        android:textSize="20sp"
+        android:textColor="@color/text_light"
         android:layout_gravity="center_vertical"
+        android:gravity="center"
         android:layout_marginRight="10dp"
-        android:id="@+id/textView" />
+        android:background="@drawable/circle_shape"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/text_email_to"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="hello@example.com"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:textColor="@color/text_dark"/>
 
         <TextView
             android:id="@+id/text_email_subj"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Permission for leave"
-            android:textSize="16sp"/>
+            android:textSize="15sp"
+            android:textColor="@color/text_grey"/>
 
         <TextView
             android:id="@+id/text_email_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="4:00 pm"
-            android:textSize="16sp"/>
+            android:textColor="@color/text_grey"
+            android:textSize="15sp"/>
     </LinearLayout>
 </LinearLayout>

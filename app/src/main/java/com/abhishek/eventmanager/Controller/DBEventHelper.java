@@ -84,11 +84,11 @@ public class DBEventHelper extends SQLiteOpenHelper {
                 email.setTo(cursor.getString(1));
                 email.setSubject(cursor.getString(2));
                 email.setBody(cursor.getString(3));
-                // Adding contact to list
+                // Adding email to list
                 emailList.add(email);
             } while (cursor.moveToNext());
         }
-        // return contact list
+        // return email list
         return emailList;
     }
 }

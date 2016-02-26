@@ -3,25 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_margin="10dp">
+    android:layout_margin="5dp">
 
-    <TextView
-        android:id="@+id/text_email_send_date"
-        android:layout_width="@dimen/date_text_view_width"
-        android:layout_height="@dimen/date_text_view_height"
-        android:text="23 MAR"
-        android:textSize="20sp"
-        android:textColor="@color/text_light"
+    <RelativeLayout
+        android:id="@+id/date_layout"
+        android:layout_width="@dimen/date_layout_width"
+        android:layout_height="@dimen/date_layout_height"
+        android:layout_marginRight="15dp"
         android:layout_gravity="center_vertical"
-        android:gravity="center"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/circle_shape"/>
+        android:background="@drawable/circle_shape">
+
+        <TextView
+            android:id="@+id/text_view_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="23"
+            android:textSize="20sp"
+            android:textColor="@color/text_light"/>
+
+        <TextView
+            android:id="@+id/text_view_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:text="MAR"
+            android:textSize="11sp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/text_light"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/text_email_to"
@@ -45,4 +67,10 @@
             android:textColor="@color/text_grey"
             android:textSize="15sp"/>
     </LinearLayout>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|right"/>
+
 </LinearLayout>

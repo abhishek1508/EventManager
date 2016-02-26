@@ -50,4 +50,8 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter<EmailEventsH
         mEmailList.add(email);
         notifyItemInserted(mEmailList.size());
     }
+
+    public void deleteRecyclerViewItem(){
+
+    }
 }

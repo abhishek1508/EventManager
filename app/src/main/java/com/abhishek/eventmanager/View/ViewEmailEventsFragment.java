@@ -7,8 +7,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.abhishek.eventmanager.Controller.DBEventHelper;
 import com.abhishek.eventmanager.Model.Email;
@@ -30,6 +35,8 @@ public class ViewEmailEventsFragment extends Fragment {
     private DBEventHelper mHelper;
     private SQLiteDatabase mDatabase;
 
+    private boolean isItemVisible = false;
+
     private EventsRecyclerViewAdapter mRecyclerViewAdapter = null;
 
     public ViewEmailEventsFragment() {
@@ -48,12 +55,36 @@ public class ViewEmailEventsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         mHelper = new DBEventHelper(getActivity());
         mDatabase = mHelper.getWritableDatabase();
         /*if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }*/
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        menu.findItem(R.id.action_delete).setVisible(isItemVisible);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.action_delete).setVisible(isItemVisible);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_delete:
+                Toast.makeText(getActivity(),"Clicked",Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return false;
     }
 
     @Override

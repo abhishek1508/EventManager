@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="date_text_view_width">100dp</dimen>
-    <dimen name="date_text_view_height">100dp</dimen>
-    <dimen name="text_view_radius">50dp</dimen>
-    <dimen name="recycler_view_divider_length_">90dp</dimen>
+    <dimen name="date_text_view_width">90dp</dimen>
+    <dimen name="date_text_view_height">90dp</dimen>
+    <dimen name="text_view_radius">45dp</dimen>
+    <dimen name="recycler_view_divider_length_">80dp</dimen>
 </resources>

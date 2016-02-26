@@ -1,8 +1,6 @@
 package com.abhishek.eventmanager.View;
 
-import android.app.ActivityOptions;
 import android.content.Context;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,12 +11,10 @@ import android.view.ActionMode;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.abhishek.eventmanager.Controller.DBEventHelper;
@@ -72,29 +68,6 @@ public class ViewEmailEventsFragment extends Fragment implements ActionMode.Call
             mParam2 = getArguments().getString(ARG_PARAM2);
         }*/
     }
-
-    /*@Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.action_delete).setVisible(isItemVisible);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_main, menu);
-        menu.findItem(R.id.action_delete).setVisible(isItemVisible);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_delete:
-                Toast.makeText(getActivity(),"Clicked",Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return false;
-    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

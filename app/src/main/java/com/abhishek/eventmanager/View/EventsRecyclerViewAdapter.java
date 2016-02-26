@@ -2,6 +2,7 @@ package com.abhishek.eventmanager.View;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import com.abhishek.eventmanager.Model.Email;
 import com.abhishek.eventmanager.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,11 +21,13 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter<EmailEventsH
     Context mContext;
     LayoutInflater inflater;
     List<Email> mEmailList;
+    private SparseBooleanArray selectedItems;
 
     public EventsRecyclerViewAdapter(Context context,List<Email>list){
         this.mContext = context;
         inflater = LayoutInflater.from(context);
         this.mEmailList = list;
+        this.selectedItems = new SparseBooleanArray();
     }
 
     @Override
@@ -53,5 +57,32 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter<EmailEventsH
 
     public void deleteRecyclerViewItem(){
 
+    }
+
+    public void toggleSelection(int pos) {
+        if (selectedItems.get(pos, false)) {
+            selectedItems.delete(pos);
+        }
+        else {
+            selectedItems.put(pos, true);
+        }
+        notifyItemChanged(pos);
+    }
+
+    public void clearSelections() {
+        selectedItems.clear();
+        notifyDataSetChanged();
+    }
+
+    public int getSelectedItemCount() {
+        return selectedItems.size();
+    }
+
+    public List<Integer> getSelectedItems() {
+        List<Integer> items = new ArrayList<>(selectedItems.size());
+        for (int i = 0; i < selectedItems.size(); i++) {
+            items.add(selectedItems.keyAt(i));
+        }
+        return items;
     }
 }

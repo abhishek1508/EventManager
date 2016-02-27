@@ -42,7 +42,7 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter<EmailEventsH
         Email email = mEmailList.get(position);
         holder.mEmailTo.setText(email.getTo());
         holder.mEmailSubj.setText(email.getSubject());
-
+        holder.itemView.setActivated(selectedItems.get(position,false));
     }
 
     @Override

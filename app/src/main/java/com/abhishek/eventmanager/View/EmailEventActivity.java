@@ -21,6 +21,7 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
     ViewEmailEventsFragment mViewFragment;
     ManageEmailEventsFragment mManageFragment;
     public static List<Email> mEmailList;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
         setSupportActionBar(toolbar);
 
         showViewEmailFragment();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,7 +39,8 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
                 mManager = getSupportFragmentManager();
                 mTransaction = mManager.beginTransaction();
                 mTransaction.replace(R.id.container_fragment, mManageFragment, "ManageEmailEvents");
-                mTransaction.addToBackStack("MessageEmailEvents");
+                mTransaction.addToBackStack("ManageEmailEvents");
+                fab.setVisibility(View.GONE);
                 mTransaction.commit();
             }
         });
@@ -54,6 +56,7 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
 
     @Override
     public void commEventDetailsToViewEventsFragment(List<String> eventDesc) {
+        fab.setVisibility(View.VISIBLE);
         Email email = new Email(eventDesc.get(0),eventDesc.get(1),eventDesc.get(2));
         mViewFragment.newCreatedEmailEvents(email);
     }

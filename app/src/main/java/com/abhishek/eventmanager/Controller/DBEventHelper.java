@@ -91,4 +91,11 @@ public class DBEventHelper extends SQLiteOpenHelper {
         // return email list
         return emailList;
     }
+
+    public void deleteEmailEventsFromTable(Email email){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_EMAIL, KEY_ID + " = ?",
+                new String[] { String.valueOf(email.getId()) });
+        db.close();
+    }
 }

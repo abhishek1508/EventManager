@@ -10,14 +10,6 @@ public class Email {
     private String body;
     private int id;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public Email(String to, String subject, String body){
         this.subject = subject;
         this.to = to;
@@ -26,6 +18,14 @@ public class Email {
 
     public Email(){
         //Empty constructor
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getSubject() {

@@ -21,6 +21,7 @@ import com.abhishek.eventmanager.Controller.DBEventHelper;
 import com.abhishek.eventmanager.Model.Email;
 import com.abhishek.eventmanager.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewEmailEventsFragment extends Fragment implements ActionMode.Callback,RecyclerView.OnItemTouchListener,View.OnClickListener{
@@ -37,8 +38,6 @@ public class ViewEmailEventsFragment extends Fragment implements ActionMode.Call
     private DBEventHelper mHelper;
     private SQLiteDatabase mDatabase;
 
-    private boolean isItemVisible = false;
-
     private EventsRecyclerViewAdapter mRecyclerViewAdapter = null;
 
     GestureDetectorCompat gestureDetector;
@@ -49,12 +48,11 @@ public class ViewEmailEventsFragment extends Fragment implements ActionMode.Call
     }
 
     public static ViewEmailEventsFragment newInstance() {
-        ViewEmailEventsFragment fragment = new ViewEmailEventsFragment();
         /*Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);*/
-        return fragment;
+        return new ViewEmailEventsFragment();
     }
 
     @Override
@@ -81,8 +79,9 @@ public class ViewEmailEventsFragment extends Fragment implements ActionMode.Call
 
     private void setRecyclerView(){
 
+        EmailEventActivity.mEmailList = mHelper.getAllEmailEvents();
         gestureDetector = new GestureDetectorCompat(getActivity(),new RecyclerViewDemoOnGestureListener());
-        mRecyclerViewAdapter = new EventsRecyclerViewAdapter(getActivity(),mHelper.getAllEmailEvents());
+        mRecyclerViewAdapter = new EventsRecyclerViewAdapter(getActivity());
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         mRecycler.setLayoutManager(manager);
@@ -118,6 +117,12 @@ public class ViewEmailEventsFragment extends Fragment implements ActionMode.Call
         mRecyclerViewAdapter.addNewEmailEvent(e);
     }
 
+    public void deleteFromEmailTable(int pos){
+        Email e =  EmailEventActivity.mEmailList.get(pos);
+        EmailEventActivity.mEmailList.remove(pos);
+        mHelper.deleteEmailEventsFromTable(e);
+    }
+
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         getActivity().getMenuInflater().inflate(R.menu.menu_cab_recyclerviewdemoactivity, menu);
@@ -136,9 +141,9 @@ public class ViewEmailEventsFragment extends Fragment implements ActionMode.Call
             case R.id.menu_delete:
                 List<Integer> selectedItemPositions = mRecyclerViewAdapter.getSelectedItems();
                 int currPos;
-                for (int i = selectedItemPositions.size() - 1; i >= 0; i--) {
+                for (int i = selectedItemPositions.size()-1; i >= 0; i--) {
                     currPos = selectedItemPositions.get(i);
-                    //RecyclerViewDemoApp.removeItemFromList(currPos);
+                    deleteFromEmailTable(currPos);
                     //adapter.removeData(currPos);
                 }
                 actionMode.finish();

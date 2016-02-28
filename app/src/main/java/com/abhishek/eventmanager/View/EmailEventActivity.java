@@ -20,6 +20,7 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
     FragmentTransaction mTransaction;
     ViewEmailEventsFragment mViewFragment;
     ManageEmailEventsFragment mManageFragment;
+    public static List<Email> mEmailList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

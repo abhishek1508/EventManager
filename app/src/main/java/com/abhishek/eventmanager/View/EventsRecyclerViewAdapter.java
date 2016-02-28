@@ -20,26 +20,23 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter<EmailEventsH
 
     Context mContext;
     LayoutInflater inflater;
-    List<Email> mEmailList;
     private SparseBooleanArray selectedItems;
 
-    public EventsRecyclerViewAdapter(Context context,List<Email>list){
+    public EventsRecyclerViewAdapter(Context context){
         this.mContext = context;
         inflater = LayoutInflater.from(context);
-        this.mEmailList = list;
         this.selectedItems = new SparseBooleanArray();
     }
 
     @Override
     public EmailEventsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = inflater.inflate(R.layout.layout_view_email_events,parent,false);
-        EmailEventsHolder mHolder = new EmailEventsHolder(v);
-        return mHolder;
+        View v = inflater.inflate(R.layout.layout_view_email_events, parent, false);
+        return new EmailEventsHolder(v);
     }
 
     @Override
     public void onBindViewHolder(EmailEventsHolder holder, int position) {
-        Email email = mEmailList.get(position);
+        Email email =  EmailEventActivity.mEmailList.get(position);
         holder.mEmailTo.setText(email.getTo());
         holder.mEmailSubj.setText(email.getSubject());
         holder.itemView.setActivated(selectedItems.get(position,false));
@@ -47,16 +44,12 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter<EmailEventsH
 
     @Override
     public int getItemCount() {
-        return mEmailList.size();
+        return  EmailEventActivity.mEmailList.size();
     }
 
     public void addNewEmailEvent(Email email){
-        mEmailList.add(email);
-        notifyItemInserted(mEmailList.size());
-    }
-
-    public void deleteRecyclerViewItem(){
-
+        EmailEventActivity.mEmailList.add(email);
+        notifyItemInserted( EmailEventActivity.mEmailList.size());
     }
 
     public void toggleSelection(int pos) {

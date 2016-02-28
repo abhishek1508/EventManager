@@ -4,4 +4,5 @@
     <dimen name="date_text_view_height">30dp</dimen>
     <dimen name="text_view_radius">15dp</dimen>
     <dimen name="recycler_view_divider_length_">50dp</dimen>
+    <dimen name="custom_views_height">160dp</dimen>
 </resources>

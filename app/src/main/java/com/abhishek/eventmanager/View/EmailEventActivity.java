@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.abhishek.eventmanager.Controller.DBEventHelper;
 import com.abhishek.eventmanager.Model.Email;
@@ -14,7 +15,7 @@ import com.abhishek.eventmanager.R;
 
 import java.util.List;
 
-public class EmailEventActivity extends AppCompatActivity implements OnViewEventsInteractionListener,OnManageEventsInteractionListener{
+public class EmailEventActivity extends AppCompatActivity implements OnViewEventsInteractionListener,OnManageEventsInteractionListener,OnTimeSelectedListener{
 
     FragmentManager mManager;
     FragmentTransaction mTransaction;
@@ -59,5 +60,10 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
         fab.setVisibility(View.VISIBLE);
         Email email = new Email(eventDesc.get(0),eventDesc.get(1),eventDesc.get(2));
         mViewFragment.newCreatedEmailEvents(email);
+    }
+
+    @Override
+    public void onTimeSelected(String time) {
+        mManageFragment.setTime(time);
     }
 }

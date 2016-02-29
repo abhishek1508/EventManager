@@ -72,8 +72,8 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
         mTimeView.setOnClickListener(this);
         mDateView.setOnClickListener(this);
 
-        setTime();
-        setDate();
+        setTime(mTimeText);
+        setDate(mDateText);
         return view;
     }
 
@@ -120,17 +120,19 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
                     Toast.makeText(getActivity(),"Enter values in all the fields",Toast.LENGTH_LONG).show();
                 break;
             case R.id.timeView:
+                SetTime fragment = new SetTime();
+                fragment.show(getFragmentManager(),"TimePickerDialog");
                 break;
             case R.id.dateView:
                 break;
         }
     }
 
-    private void setTime(){
-        mTimeView.setTimeText(mTimeText);
+    public void setTime(String time){
+        mTimeView.setTimeText(time);
     }
 
-    private void setDate(){
-        mDateView.setDateText(mDateText);
+    public void setDate(String date){
+        mDateView.setDateText(date);
     }
 }

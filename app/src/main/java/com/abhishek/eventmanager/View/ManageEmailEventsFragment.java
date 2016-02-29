@@ -1,7 +1,6 @@
 package com.abhishek.eventmanager.View;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -120,10 +119,12 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
                     Toast.makeText(getActivity(),"Enter values in all the fields",Toast.LENGTH_LONG).show();
                 break;
             case R.id.timeView:
-                SetTime fragment = new SetTime();
-                fragment.show(getFragmentManager(),"TimePickerDialog");
+                SetTime timeFragment = new SetTime();
+                timeFragment.show(getFragmentManager(),"TimePickerDialog");
                 break;
             case R.id.dateView:
+                SetDate dateFragment = new SetDate();
+                dateFragment.show(getFragmentManager(),"DatePickerDialog");
                 break;
         }
     }

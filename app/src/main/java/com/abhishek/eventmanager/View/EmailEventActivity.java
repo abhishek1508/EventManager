@@ -7,15 +7,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
-
-import com.abhishek.eventmanager.Controller.DBEventHelper;
 import com.abhishek.eventmanager.Model.Email;
 import com.abhishek.eventmanager.R;
 
 import java.util.List;
 
-public class EmailEventActivity extends AppCompatActivity implements OnViewEventsInteractionListener,OnManageEventsInteractionListener,OnTimeSelectedListener{
+public class EmailEventActivity extends AppCompatActivity implements OnViewEventsInteractionListener,OnManageEventsInteractionListener,OnTimeSelectedListener, onDateSelectedListener{
 
     FragmentManager mManager;
     FragmentTransaction mTransaction;
@@ -65,5 +62,10 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
     @Override
     public void onTimeSelected(String time) {
         mManageFragment.setTime(time);
+    }
+
+    @Override
+    public void onDateSet(String date) {
+        mManageFragment.setDate(date);
     }
 }

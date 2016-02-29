@@ -24,6 +24,8 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
     private String mParam2;
     private String mTimeText = "Set Time";
     private String mDateText = "Set Date";
+    private boolean isTimeSet = false;
+    private boolean isDateSet = false;
 
     private OnManageEventsInteractionListener mListener;
 
@@ -71,8 +73,8 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
         mTimeView.setOnClickListener(this);
         mDateView.setOnClickListener(this);
 
-        setTime(mTimeText);
-        setDate(mDateText);
+        setTime(mTimeText, isTimeSet);
+        setDate(mDateText, isDateSet);
         return view;
     }
 
@@ -108,7 +110,7 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
                 String to = String.valueOf(mTo.getText());
                 String subj = String.valueOf(mSubj.getText());
                 String body = String.valueOf(mBody.getText());
-                if(!to.equals("") && !subj.equals("") && !body.equals("")){
+                if(!to.equals("") && !subj.equals("") && !body.equals("") && isTimeSet && isDateSet){
                     List<String> mEmailEventDesc = new ArrayList<>();
                     mEmailEventDesc.add(to);
                     mEmailEventDesc.add(subj);
@@ -129,11 +131,22 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
         }
     }
 
-    public void setTime(String time){
+    public void setTime(String time, boolean isSet){
+        isTimeSet = isSet;
         mTimeView.setTimeText(time);
     }
 
-    public void setDate(String date){
+    public void setDate(String date, boolean isSet){
+        isDateSet = isSet;
         mDateView.setDateText(date);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        isTimeSet = false;
+        isDateSet = false;
+    }
+
+
 }

@@ -23,6 +23,8 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
 
     private String mParam1;
     private String mParam2;
+    private String mTimeText = "Set Time";
+    private String mDateText = "Set Date";
 
     private OnManageEventsInteractionListener mListener;
 
@@ -30,6 +32,8 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
     private EditText mSubj;
     private EditText mBody;
     private Button mSaveButton;
+    private TimeAndDateCustomView mTimeView;
+    private TimeAndDateCustomView mDateView;
 
     public ManageEmailEventsFragment() {
         // Required empty public constructor
@@ -61,8 +65,15 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
         mSubj = (EditText) view.findViewById(R.id.subject_editText);
         mBody = (EditText) view.findViewById(R.id.body_editText);
         mSaveButton = (Button) view.findViewById(R.id.save_button);
+        mTimeView = (TimeAndDateCustomView) view.findViewById(R.id.timeView);
+        mDateView = (TimeAndDateCustomView) view.findViewById(R.id.dateView);
 
         mSaveButton.setOnClickListener(this);
+        mTimeView.setOnClickListener(this);
+        mDateView.setOnClickListener(this);
+
+        setTime();
+        setDate();
         return view;
     }
 
@@ -108,6 +119,18 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
                 else
                     Toast.makeText(getActivity(),"Enter values in all the fields",Toast.LENGTH_LONG).show();
                 break;
+            case R.id.timeView:
+                break;
+            case R.id.dateView:
+                break;
         }
+    }
+
+    private void setTime(){
+        mTimeView.setTimeText(mTimeText);
+    }
+
+    private void setDate(){
+        mDateView.setDateText(mDateText);
     }
 }

@@ -19,8 +19,9 @@ public class TimeAndDateCustomView extends View {
     private float mWidth;
     private float mHeight;
 
-    private String mTimeText = "Set Time";
-    private String mDateText = "Set Date";
+    private String mCircleText = "Hello";
+    private String mTime;
+    private String mDate;
 
     private float mRadius = 110.0f;
     private RectF rect = null;
@@ -54,8 +55,8 @@ public class TimeAndDateCustomView extends View {
         canvas.drawArc(rect, 180, 360, false, paint);
         textPaint.setStyle(Paint.Style.FILL);
         textPaint.setTextAlign(Paint.Align.CENTER);
-        textPaint.setTextSize(50);
-        canvas.drawText("Hello", mWidth / 2, mHeight / 2, textPaint);
+        textPaint.setTextSize(35);
+        canvas.drawText(mCircleText, mWidth / 2, mHeight / 2, textPaint);
     }
 
     @Override
@@ -84,7 +85,8 @@ public class TimeAndDateCustomView extends View {
 
     public void setTimeText(String newLabel){
         //update the instance variable
-        mTimeText=newLabel;
+        mCircleText = newLabel;
+        mTime = mCircleText;
         //redraw the view
         invalidate();
         requestLayout();
@@ -92,17 +94,18 @@ public class TimeAndDateCustomView extends View {
 
     public void setDateText(String newLabel){
         //update the instance variable
-        mDateText=newLabel;
+        mCircleText = newLabel;
+        mDate = mCircleText;
         //redraw the view
         invalidate();
         requestLayout();
     }
 
-    public String getTimeText() {
-        return mTimeText;
+    public String getTime() {
+        return mTime;
     }
 
-    public String getDateText() {
-        return mDateText;
+    public String getDate() {
+        return mDate;
     }
 }

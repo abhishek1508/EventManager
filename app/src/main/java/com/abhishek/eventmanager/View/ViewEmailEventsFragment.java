@@ -178,14 +178,16 @@ public class ViewEmailEventsFragment extends Fragment implements ActionMode.Call
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.container_list_item) {
-            // item click
-            int idx = mRecycler.getChildPosition(v);
-            if (actionMode != null) {
-                myToggleSelection(idx);
-                return;
+        if(v != null) {
+            if (v.getId() == R.id.container_list_item) {
+                // item click
+                int idx = mRecycler.getChildPosition(v);
+                if (actionMode != null) {
+                    myToggleSelection(idx);
+                    return;
+                }
+                Toast.makeText(getActivity(), "Item clicked", Toast.LENGTH_LONG).show();
             }
-            Toast.makeText(getActivity(),"Item clicked",Toast.LENGTH_LONG).show();
         }
     }
 

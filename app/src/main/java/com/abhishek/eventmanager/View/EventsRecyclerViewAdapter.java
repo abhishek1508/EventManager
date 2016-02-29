@@ -39,12 +39,21 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter<EmailEventsH
         Email email =  EmailEventActivity.mEmailList.get(position);
         holder.mEmailTo.setText(email.getTo());
         holder.mEmailSubj.setText(email.getSubject());
+        holder.mEmailTime.setText(email.getTime());
+        String[] date = splitDayMonth(email.getDate());
+        holder.mDay.setText(date[0]);
+        holder.mMonth.setText(date[1]);
         holder.itemView.setActivated(selectedItems.get(position,false));
     }
 
     @Override
     public int getItemCount() {
         return  EmailEventActivity.mEmailList.size();
+    }
+
+    public String[] splitDayMonth(String date){
+        String[] splitDate = date.split(" ");
+        return splitDate;
     }
 
     public void addNewEmailEvent(Email email){

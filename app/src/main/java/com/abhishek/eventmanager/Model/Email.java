@@ -9,15 +9,35 @@ public class Email {
     private String to;
     private String body;
     private int id;
+    private String time;
+    private String date;
 
-    public Email(String to, String subject, String body){
+    public Email(String to, String subject, String body, String time, String date){
         this.subject = subject;
         this.to = to;
         this.body = body;
+        this.time = time;
+        this.date = date;
     }
 
     public Email(){
         //Empty constructor
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public int getId() {

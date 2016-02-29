@@ -56,18 +56,18 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
     @Override
     public void commEventDetailsToViewEventsFragment(List<String> eventDesc) {
         fab.setVisibility(View.VISIBLE);
-        Email email = new Email(eventDesc.get(0), eventDesc.get(1), eventDesc.get(2));
+        Email email = new Email(eventDesc.get(0), eventDesc.get(1), eventDesc.get(2), eventDesc.get(3), eventDesc.get(4));
         mViewFragment.newCreatedEmailEvents(email);
     }
 
     @Override
     public void onTimeSelected(String time) {
-        mManageFragment.setTime(time, true);
+        mManageFragment.setTime(time);
     }
 
     @Override
     public void onDateSet(String date) {
-        mManageFragment.setDate(date, true);
+        mManageFragment.setDate(date);
     }
 
     /*

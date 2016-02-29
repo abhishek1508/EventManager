@@ -29,12 +29,14 @@ public class DBEventHelper extends SQLiteOpenHelper {
     private static final String KEY_EMAIL_ID = "EmailTo";
     private static final String KEY_SUBJECT = "Subject";
     private static final String KEY_BODY = "Body";
+    private static final String KEY_TIME = "Time";
+    private static final String KEY_DATE = "Date";
 
     //Create Email table
     private static final String CREATE_TABLE_EMAIL = "CREATE TABLE "
             + TABLE_EMAIL + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_EMAIL_ID
             + " TEXT," + KEY_SUBJECT + " TEXT," + KEY_BODY
-            + " TEXT" + ")";
+            + " TEXT," + KEY_TIME + " TEXT," + KEY_DATE + " TEXT " + ")";
 
 
     public DBEventHelper(Context context) {
@@ -62,6 +64,8 @@ public class DBEventHelper extends SQLiteOpenHelper {
         values.put(KEY_EMAIL_ID, email.getTo());
         values.put(KEY_SUBJECT, email.getSubject());
         values.put(KEY_BODY, email.getBody());
+        values.put(KEY_TIME, email.getTime());
+        values.put(KEY_DATE, email.getDate());
 
         db.insert(TABLE_EMAIL, null, values);
         db.close();
@@ -84,6 +88,8 @@ public class DBEventHelper extends SQLiteOpenHelper {
                 email.setTo(cursor.getString(1));
                 email.setSubject(cursor.getString(2));
                 email.setBody(cursor.getString(3));
+                email.setTime(cursor.getString(4));
+                email.setDate(cursor.getString(5));
                 // Adding email to list
                 emailList.add(email);
             } while (cursor.moveToNext());

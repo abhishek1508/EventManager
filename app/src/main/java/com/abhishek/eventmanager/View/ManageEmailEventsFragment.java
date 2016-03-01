@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.abhishek.eventmanager.Model.Email;
 import com.abhishek.eventmanager.R;
 
 import java.util.ArrayList;
@@ -20,14 +21,16 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private String mParam1;
-    private String mParam2;
+    private boolean mParam1;
+    private boolean sToBeUpdated = false;
+
     private String mTimeText = "Set Time";
     private String mDateText = "Set Date";
     private String mTime = "";
     private String mDate = "";
 
     private OnManageEventsInteractionListener mListener;
+    private Email mEmail = null;
 
     private EditText mTo;
     private EditText mSubj;
@@ -40,22 +43,24 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
         // Required empty public constructor
     }
 
-    public static ManageEmailEventsFragment newInstance() {
+    public static ManageEmailEventsFragment newInstance(boolean value,Email email) {
         ManageEmailEventsFragment fragment = new ManageEmailEventsFragment();
-        /*Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);*/
+        Bundle args = new Bundle();
+        args.putBoolean(ARG_PARAM1,value);
+        args.putParcelable(ARG_PARAM2,email);
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }*/
+        if (getArguments() != null) {
+            mParam1 = getArguments().getBoolean(ARG_PARAM1);
+            if(mParam1){
+                mEmail = getArguments().getParcelable(ARG_PARAM2);
+            }
+        }
     }
 
     @Override
@@ -73,9 +78,23 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
         mTimeView.setOnClickListener(this);
         mDateView.setOnClickListener(this);
 
-        setTime(mTimeText);
-        setDate(mDateText);
+        loadViewsWithEmailData();
         return view;
+    }
+
+    public void loadViewsWithEmailData(){
+        if(mEmail != null){
+            mTo.setText(mEmail.getTo());
+            mSubj.setText(mEmail.getSubject());
+            mBody.setText(mEmail.getBody());
+            setTime(mEmail.getTime());
+            setDate(mEmail.getDate());
+            sToBeUpdated = true;
+        }
+        else{
+            setTime(mTimeText);
+            setDate(mDateText);
+        }
     }
 
     public void onSaveButtonClicked(List<String> emailEventDesc) {

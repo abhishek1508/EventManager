@@ -13,7 +13,7 @@ import com.abhishek.eventmanager.R;
 
 import java.util.List;
 
-public class EmailEventActivity extends AppCompatActivity implements OnViewEventsInteractionListener, OnManageEventsInteractionListener, OnTimeSelectedListener, onDateSelectedListener {
+public class EmailEventActivity extends AppCompatActivity implements OnViewEventsInteractionListener, OnManageEventsInteractionListener, OnTimeSelectedListener, onDateSelectedListener, View.OnClickListener {
 
     FragmentManager mManager;
     FragmentTransaction mTransaction;
@@ -31,21 +31,20 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
 
         showViewEmailFragment();
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mManageFragment = ManageEmailEventsFragment.newInstance();
-                mManager = getSupportFragmentManager();
-                mTransaction = mManager.beginTransaction();
-                mTransaction.replace(R.id.container_fragment, mManageFragment, "ManageEmailEvents");
-                mTransaction.addToBackStack("ManageEmailEvents");
-                fab.setVisibility(View.GONE);
-                mTransaction.commit();
-            }
-        });
+        fab.setOnClickListener(this);
     }
 
-    private void showViewEmailFragment() {
+    protected void showManageEmailFragment(boolean val,Email e){
+        mManageFragment = ManageEmailEventsFragment.newInstance(val,e);
+        mManager = getSupportFragmentManager();
+        mTransaction = mManager.beginTransaction();
+        mTransaction.replace(R.id.container_fragment, mManageFragment, "ManageEmailEvents");
+        mTransaction.addToBackStack("ManageEmailEvents");
+        fab.setVisibility(View.GONE);
+        mTransaction.commit();
+    }
+
+    protected void showViewEmailFragment() {
         mViewFragment = ViewEmailEventsFragment.newInstance();
         mManager = getSupportFragmentManager();
         mTransaction = mManager.beginTransaction();
@@ -82,6 +81,15 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
         else {
             fab.setVisibility(View.VISIBLE);
             getSupportFragmentManager().popBackStack();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.fab:
+                showManageEmailFragment(false,null);
+                break;
         }
     }
 }

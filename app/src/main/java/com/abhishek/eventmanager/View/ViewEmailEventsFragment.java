@@ -181,14 +181,19 @@ public class ViewEmailEventsFragment extends Fragment implements ActionMode.Call
         if(v != null) {
             if (v.getId() == R.id.container_list_item) {
                 // item click
-                int idx = mRecycler.getChildPosition(v);
+                int position = mRecycler.getChildPosition(v);
                 if (actionMode != null) {
-                    myToggleSelection(idx);
+                    myToggleSelection(position);
                     return;
                 }
-                Toast.makeText(getActivity(), "Item clicked", Toast.LENGTH_LONG).show();
+                openEmailReminder(position);
             }
         }
+    }
+
+    private void openEmailReminder(int pos){
+        Email email = EmailEventActivity.mEmailList.get(pos);
+        ((EmailEventActivity) getActivity()).showManageEmailFragment(true,email);
     }
 
     private void myToggleSelection(int selected_items) {

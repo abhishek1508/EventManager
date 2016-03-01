@@ -1,9 +1,12 @@
 package com.abhishek.eventmanager.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Abhishek on 2/23/2016.
  */
-public class Email {
+public class Email implements Parcelable {
 
     private String subject;
     private String to;
@@ -12,7 +15,7 @@ public class Email {
     private String time;
     private String date;
 
-    public Email(String to, String subject, String body, String time, String date){
+    public Email(String to, String subject, String body, String time, String date) {
         this.subject = subject;
         this.to = to;
         this.body = body;
@@ -20,8 +23,17 @@ public class Email {
         this.date = date;
     }
 
-    public Email(){
+    public Email() {
         //Empty constructor
+    }
+
+    public Email(Parcel input) {
+        this.id = input.readInt();
+        this.to = input.readString();
+        this.subject = input.readString();
+        this.body = input.readString();
+        this.time = input.readString();
+        this.date = input.readString();
     }
 
     public String getTime() {
@@ -71,4 +83,32 @@ public class Email {
     public void setBody(String body) {
         this.body = body;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(to);
+        dest.writeString(subject);
+        dest.writeString(body);
+        dest.writeString(time);
+        dest.writeString(date);
+    }
+
+    public static final Parcelable.Creator<Email> CREATOR = new Parcelable.Creator<Email>() {
+
+        @Override
+        public Email createFromParcel(Parcel source) {
+            return new Email(source);  //using parcelable constructor
+        }
+
+        @Override
+        public Email[] newArray(int size) {
+            return new Email[size];
+        }
+    };
 }

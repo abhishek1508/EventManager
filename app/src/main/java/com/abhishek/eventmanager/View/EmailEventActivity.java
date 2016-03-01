@@ -53,9 +53,9 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
     }
 
     @Override
-    public void commEventDetailsToViewEventsFragment(List<String> eventDesc) {
+    public void commEventDetailsToViewEventsFragment(Email email) {
         fab.setVisibility(View.VISIBLE);
-        Email email = new Email(eventDesc.get(0), eventDesc.get(1), eventDesc.get(2), eventDesc.get(3), eventDesc.get(4));
+        //Email email = new Email(eventDesc.get(0), eventDesc.get(1), eventDesc.get(2), eventDesc.get(3), eventDesc.get(4));
         mViewFragment.newCreatedEmailEvents(email);
     }
 

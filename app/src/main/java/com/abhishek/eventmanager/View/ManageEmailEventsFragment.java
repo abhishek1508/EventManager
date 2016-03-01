@@ -13,9 +13,6 @@ import android.widget.Toast;
 import com.abhishek.eventmanager.Model.Email;
 import com.abhishek.eventmanager.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ManageEmailEventsFragment extends Fragment implements View.OnClickListener{
 
     private static final String ARG_PARAM1 = "param1";
@@ -97,9 +94,9 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
         }
     }
 
-    public void onSaveButtonClicked(List<String> emailEventDesc) {
+    public void onSaveButtonClicked(Email email) {
         if (mListener != null) {
-            mListener.commEventDetailsToViewEventsFragment(emailEventDesc);
+            mListener.commEventDetailsToViewEventsFragment(email);
             //Close the fragment after the event has been saved
             getActivity().getSupportFragmentManager().popBackStack();
         }
@@ -130,13 +127,7 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
                 String subj = String.valueOf(mSubj.getText());
                 String body = String.valueOf(mBody.getText());
                 if(!to.equals("") && !subj.equals("") && !body.equals("") && !mTime.equals("") && !mDate.equals("")){
-                    List<String> mEmailEventDesc = new ArrayList<>();
-                    mEmailEventDesc.add(to);
-                    mEmailEventDesc.add(subj);
-                    mEmailEventDesc.add(body);
-                    mEmailEventDesc.add(mTime);
-                    mEmailEventDesc.add(mDate);
-                    onSaveButtonClicked(mEmailEventDesc);
+                    onSaveButtonClicked(new Email(to,subj,body,mTime,mDate));
                 }
                 else
                     Toast.makeText(getActivity(),"Enter values in all the fields",Toast.LENGTH_LONG).show();

@@ -1,11 +1,11 @@
 package com.abhishek.eventmanager.View;
 
-import java.util.List;
+import com.abhishek.eventmanager.Model.Email;
 
 /**
  * Created by Abhishek on 2/24/2016.
  */
 public interface OnManageEventsInteractionListener {
 
-    public void commEventDetailsToViewEventsFragment(List<String> eventDesc);
+    public void commEventDetailsToViewEventsFragment(Email email);
 }

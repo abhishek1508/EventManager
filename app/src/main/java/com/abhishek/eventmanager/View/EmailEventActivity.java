@@ -34,8 +34,8 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
         fab.setOnClickListener(this);
     }
 
-    protected void showManageEmailFragment(boolean val,Email e){
-        mManageFragment = ManageEmailEventsFragment.newInstance(val,e);
+    protected void showManageEmailFragment(int pos, Email e){
+        mManageFragment = ManageEmailEventsFragment.newInstance(pos,e);
         mManager = getSupportFragmentManager();
         mTransaction = mManager.beginTransaction();
         mTransaction.replace(R.id.container_fragment, mManageFragment, "ManageEmailEvents");
@@ -53,10 +53,12 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
     }
 
     @Override
-    public void commEventDetailsToViewEventsFragment(Email email) {
+    public void commEventDetailsToViewEventsFragment(Email email, int pos) {
         fab.setVisibility(View.VISIBLE);
-        //Email email = new Email(eventDesc.get(0), eventDesc.get(1), eventDesc.get(2), eventDesc.get(3), eventDesc.get(4));
-        mViewFragment.newCreatedEmailEvents(email);
+        if(pos < 0)
+            mViewFragment.newCreatedEmailEvents(email);
+        else
+            mViewFragment.updateExistingEmailReminder(email,pos);
     }
 
     @Override
@@ -88,7 +90,7 @@ public class EmailEventActivity extends AppCompatActivity implements OnViewEvent
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.fab:
-                showManageEmailFragment(false,null);
+                showManageEmailFragment(-1,null);
                 break;
         }
     }

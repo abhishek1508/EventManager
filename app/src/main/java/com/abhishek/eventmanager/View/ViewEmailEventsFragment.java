@@ -117,6 +117,11 @@ public class ViewEmailEventsFragment extends Fragment implements ActionMode.Call
         mRecyclerViewAdapter.addNewEmailEvent(e);
     }
 
+    public void updateExistingEmailReminder(Email e, int pos){
+        int i = mHelper.updateEmailReminder(e);
+        mRecyclerViewAdapter.updateExistingEmailReminder(e,pos);
+    }
+
     public void deleteFromEmailTable(int pos){
         Email e =  EmailEventActivity.mEmailList.get(pos);
         EmailEventActivity.mEmailList.remove(pos);
@@ -193,7 +198,7 @@ public class ViewEmailEventsFragment extends Fragment implements ActionMode.Call
 
     private void openEmailReminder(int pos){
         Email email = EmailEventActivity.mEmailList.get(pos);
-        ((EmailEventActivity) getActivity()).showManageEmailFragment(true,email);
+        ((EmailEventActivity) getActivity()).showManageEmailFragment(pos, email);
     }
 
     private void myToggleSelection(int selected_items) {

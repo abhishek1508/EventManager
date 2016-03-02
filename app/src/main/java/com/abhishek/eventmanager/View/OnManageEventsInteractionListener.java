@@ -7,5 +7,5 @@ import com.abhishek.eventmanager.Model.Email;
  */
 public interface OnManageEventsInteractionListener {
 
-    public void commEventDetailsToViewEventsFragment(Email email);
+    void commEventDetailsToViewEventsFragment(Email email, int updatedPosition);
 }

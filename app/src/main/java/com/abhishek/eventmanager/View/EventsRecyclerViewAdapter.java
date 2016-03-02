@@ -52,13 +52,18 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter<EmailEventsH
     }
 
     public String[] splitDayMonth(String date){
-        String[] splitDate = date.split(" ");
-        return splitDate;
+        return date.split(" ");
     }
 
     public void addNewEmailEvent(Email email){
         EmailEventActivity.mEmailList.add(email);
         notifyItemInserted( EmailEventActivity.mEmailList.size());
+    }
+
+    public void updateExistingEmailReminder(Email email, int pos){
+        /*EmailEventActivity.mEmailList.remove(pos);
+        EmailEventActivity.mEmailList.add(pos,email);*/
+        notifyItemChanged(pos,email);
     }
 
     public void toggleSelection(int pos) {

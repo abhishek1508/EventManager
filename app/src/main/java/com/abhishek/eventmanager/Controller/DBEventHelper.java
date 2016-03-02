@@ -60,14 +60,7 @@ public class DBEventHelper extends SQLiteOpenHelper {
     public void addEmail(Email email){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(KEY_EMAIL_ID, email.getTo());
-        values.put(KEY_SUBJECT, email.getSubject());
-        values.put(KEY_BODY, email.getBody());
-        values.put(KEY_TIME, email.getTime());
-        values.put(KEY_DATE, email.getDate());
-
-        db.insert(TABLE_EMAIL, null, values);
+        db.insert(TABLE_EMAIL, null, addAndUpdateEmailReminders(email));
         db.close();
         Toast.makeText(mContext, "Entry added", Toast.LENGTH_SHORT).show();
     }
@@ -101,7 +94,25 @@ public class DBEventHelper extends SQLiteOpenHelper {
     public void deleteEmailEventsFromTable(Email email){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_EMAIL, KEY_ID + " = ?",
-                new String[] { String.valueOf(email.getId()) });
+                new String[]{String.valueOf(email.getId())});
         db.close();
+    }
+
+    // Updating single contact
+    public int updateEmailReminder(Email email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        // updating row
+        return db.update(TABLE_EMAIL, addAndUpdateEmailReminders(email), KEY_ID + " = ?",
+                new String[] { String.valueOf(email.getId()) });
+    }
+
+    public ContentValues addAndUpdateEmailReminders(Email email){
+        ContentValues values = new ContentValues();
+        values.put(KEY_EMAIL_ID, email.getTo());
+        values.put(KEY_SUBJECT, email.getSubject());
+        values.put(KEY_BODY, email.getBody());
+        values.put(KEY_TIME, email.getTime());
+        values.put(KEY_DATE, email.getDate());
+        return values;
     }
 }

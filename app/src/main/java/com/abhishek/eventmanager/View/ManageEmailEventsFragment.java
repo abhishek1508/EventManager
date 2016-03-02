@@ -13,12 +13,12 @@ import android.widget.Toast;
 import com.abhishek.eventmanager.Model.Email;
 import com.abhishek.eventmanager.R;
 
-public class ManageEmailEventsFragment extends Fragment implements View.OnClickListener{
+public class ManageEmailEventsFragment extends Fragment implements View.OnClickListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private boolean mParam1;
+    private int mToBeUpdatedPosition = -1;
     private boolean sToBeUpdated = false;
 
     private String mTimeText = "Set Time";
@@ -40,11 +40,11 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
         // Required empty public constructor
     }
 
-    public static ManageEmailEventsFragment newInstance(boolean value,Email email) {
+    public static ManageEmailEventsFragment newInstance(int pos, Email email) {
         ManageEmailEventsFragment fragment = new ManageEmailEventsFragment();
         Bundle args = new Bundle();
-        args.putBoolean(ARG_PARAM1,value);
-        args.putParcelable(ARG_PARAM2,email);
+        args.putInt(ARG_PARAM1, pos);
+        args.putParcelable(ARG_PARAM2, email);
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,8 +53,8 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getBoolean(ARG_PARAM1);
-            if(mParam1){
+            mToBeUpdatedPosition = getArguments().getInt(ARG_PARAM1);
+            if (mToBeUpdatedPosition >= 0) {
                 mEmail = getArguments().getParcelable(ARG_PARAM2);
             }
         }
@@ -79,24 +79,23 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
         return view;
     }
 
-    public void loadViewsWithEmailData(){
-        if(mEmail != null){
+    public void loadViewsWithEmailData() {
+        if (mEmail != null) {
             mTo.setText(mEmail.getTo());
             mSubj.setText(mEmail.getSubject());
             mBody.setText(mEmail.getBody());
             setTime(mEmail.getTime());
             setDate(mEmail.getDate());
             sToBeUpdated = true;
-        }
-        else{
+        } else {
             setTime(mTimeText);
             setDate(mDateText);
         }
     }
 
-    public void onSaveButtonClicked(Email email) {
+    public void onSaveButtonClicked(Email email, int pos) {
         if (mListener != null) {
-            mListener.commEventDetailsToViewEventsFragment(email);
+            mListener.commEventDetailsToViewEventsFragment(email, pos);
             //Close the fragment after the event has been saved
             getActivity().getSupportFragmentManager().popBackStack();
         }
@@ -121,34 +120,39 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.save_button:
                 String to = String.valueOf(mTo.getText());
                 String subj = String.valueOf(mSubj.getText());
                 String body = String.valueOf(mBody.getText());
-                if(!to.equals("") && !subj.equals("") && !body.equals("") && !mTime.equals("") && !mDate.equals("")){
-                    onSaveButtonClicked(new Email(to,subj,body,mTime,mDate));
+                if (!to.equals("") && !subj.equals("") && !body.equals("") && !mTime.equals("") && !mDate.equals("")) {
+                    mEmail.setTo(to);
+                    mEmail.setSubject(subj);
+                    mEmail.setBody(body);
+                    mEmail.setTime(mTime);
+                    mEmail.setDate(mDate);
+                    onSaveButtonClicked(mEmail, mToBeUpdatedPosition);
                 }
                 else
-                    Toast.makeText(getActivity(),"Enter values in all the fields",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Enter values in all the fields", Toast.LENGTH_LONG).show();
                 break;
             case R.id.timeView:
                 SetTime timeFragment = new SetTime();
-                timeFragment.show(getFragmentManager(),"TimePickerDialog");
+                timeFragment.show(getFragmentManager(), "TimePickerDialog");
                 break;
             case R.id.dateView:
                 SetDate dateFragment = new SetDate();
-                dateFragment.show(getFragmentManager(),"DatePickerDialog");
+                dateFragment.show(getFragmentManager(), "DatePickerDialog");
                 break;
         }
     }
 
-    public void setTime(String time){
+    public void setTime(String time) {
         mTime = time;
         mTimeView.setTimeText(time);
     }
 
-    public void setDate(String date){
+    public void setDate(String date) {
         mDate = date;
         mDateView.setDateText(date);
     }

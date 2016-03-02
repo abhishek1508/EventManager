@@ -125,13 +125,17 @@ public class ManageEmailEventsFragment extends Fragment implements View.OnClickL
                 String to = String.valueOf(mTo.getText());
                 String subj = String.valueOf(mSubj.getText());
                 String body = String.valueOf(mBody.getText());
-                if (!to.equals("") && !subj.equals("") && !body.equals("") && !mTime.equals("") && !mDate.equals("")) {
-                    mEmail.setTo(to);
-                    mEmail.setSubject(subj);
-                    mEmail.setBody(body);
-                    mEmail.setTime(mTime);
-                    mEmail.setDate(mDate);
-                    onSaveButtonClicked(mEmail, mToBeUpdatedPosition);
+                if (!to.equals("") && !subj.equals("") && !body.equals("") && !mTime.equals("") && !mDate.equals("") && !mTime.equals(mTimeText) && !mDate.equals(mDateText) ) {
+                    if(sToBeUpdated) {
+                        mEmail.setTo(to);
+                        mEmail.setSubject(subj);
+                        mEmail.setBody(body);
+                        mEmail.setTime(mTime);
+                        mEmail.setDate(mDate);
+                        onSaveButtonClicked(mEmail, mToBeUpdatedPosition);
+                    }
+                    else
+                        onSaveButtonClicked(new Email(to,subj,body,mTime,mDate),mToBeUpdatedPosition);
                 }
                 else
                     Toast.makeText(getActivity(), "Enter values in all the fields", Toast.LENGTH_LONG).show();
